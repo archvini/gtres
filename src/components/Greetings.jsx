@@ -1,3 +1,4 @@
+
 function Greetings({ nome, mensagem }) {
     return(
         <div className="greeting">
