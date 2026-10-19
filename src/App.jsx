@@ -1,31 +1,29 @@
-
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
-import './App.css'
-import { Header } from './components/Header'
+import './App.css';
+import { Header } from './components/Header';
 import Home from './pages/Home';
-import Contact from './components/Contact';
+import Contact from './pages/Contact';
 
 function App() {
-
   return (
     <BrowserRouter>
-    <Header 
-    brand="Geração Tech"
-    description="Sede Bezerra">
+      <Header
+        brand="Geração Tech"
+        description="Sede Bezerra"
+      >
+        <a href="/#equipe">Equipe</a>
+        <NavLink to="/contato">Contato</NavLink>
+      </Header>
 
-      <a href="/#equipe">Equipe</a>
-      <NavLink to="/contato">Contato</NavLink>
-
-    </Header>
-    <main className='container'>
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='*' element={<Contact/>}/>
-         <Route path='/contato' element={<Contact/>}/>
-      </Routes>
-    </main>
+      <main className="container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contato" element={<Contact />} />
+          <Route path="*" element={<Home />} />
+        </Routes>
+      </main>
     </BrowserRouter>
-  )
+  );
 }
-     
+
 export default App;

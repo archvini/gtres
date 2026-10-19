@@ -1,4 +1,5 @@
 import style from './UserCard.module.css'
+
 const UserCard = ({
     name,
     age,
@@ -8,21 +9,22 @@ const UserCard = ({
     children
 }) => {
     return(
-        <articule className={style.card}>
+        <article className={style.card}>
             <img 
-            src={avatarUrl}
-            alt={`Foto de ${name}`}/>
-            className={style.avatar}
+                src={avatarUrl} 
+                alt={`Foto de ${name}`}
+                className={style.avatar}
+            />
             <div className={style.content}>
                 <div className={style.heading}>
-                    <h2></h2>
+                    <h2>{name}</h2>
                     {isMentor && <span className={style.badge}>Mentor</span>}
                 </div>
                 <p className={style.profession}>{profession}</p>
                 <p className={style.age}>{age}</p>
                 {children}
-
             </div>
-        </articule>
+        </article>
     );
 }
+export default UserCard;
