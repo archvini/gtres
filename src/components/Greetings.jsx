@@ -1,4 +1,6 @@
-function Greetings({ nome = "Carlos", mensagem = "Seja bem vindo(a)!" }) {
+import './Greetings.css'
+
+function Greetings({ nome, mensagem = "Seja bem vindo(a)!" }) {
     return(
         <div className="greeting">
             <span className="greeting__eyebrow">React - Primeiros Passos</span>
