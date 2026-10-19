@@ -1,12 +1,12 @@
+import './Greetings.css'
 
-function Greetings({ nome, mensagem }) {
+function Greetings({ nome, mensagem = "Seja bem vindo(a)!" }) {
     return(
         <div className="greeting">
-            <span className="greenting_eyebrow">React - Primeiros passos</span>
+            <span className="greeting__eyebrow">React - Primeiros Passos</span>
             <h1>{nome}, {mensagem}</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, velit? Quod voluptates dolores itaque corrupti nostrum. Illum nisi, quas, eaque tempora molestias nesciunt id blanditiis nemo quaerat dolore dignissimos quasi.</p>
-   
-   </div>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis, quaerat? Veniam id illum provident exercitationem nisi omnis, mollitia obcaecati minus officia, quam esse earum excepturi explicabo saepe nesciunt autem voluptatum.</p>
+        </div>
     );
 }
 export default Greetings;
