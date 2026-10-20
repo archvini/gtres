@@ -7,38 +7,37 @@ const initialForm = {
     neighborhood: '',
     state: '',
     city: '',
-    number:'',
+    number: '',
     message: ''
 }
 
 export default function Contact() {
     const [form, setForm] = useState(initialForm);
     const [status, setStatus] = useState({ type: '', message: '' });
-    
+
     async function searchCep() {
         const cleanCep = form.cep.replace(/\D/g, '');
-        if (cleanCep.lenght !== 8) {
-            setStatus({ type: 'error', message: 'Digite um CEP válido'});
+        if (cleanCep.length !== 8) {
+            setStatus({ type: 'error', message: 'Digite um CEP válido!' });
+            return;
         }
+
         try {
             const response = await fetch(`https://viacep.com.br/ws/${cleanCep}/json/`);
-            if (!response.ok) throw new Error('Falha na busca pelo Cep!');
+            if (!response.ok) throw new Error('Falha na busca do CEP');
             const address = await response.json();
-            if (address.erro) throw new Error('CEP não encontrado.');
+            if (address.erro) throw new Error('CEP não encontrado');
             setForm((current) => ({
-                ...current
-                cep: cleanCep || '',
+                ...current,
+                cep: cleanCep,
                 street: address.logradouro || '',
                 neighborhood: address.bairro || '',
                 state: address.uf || '',
-                city: address.localidade || '',
+                city: address.localidade || ''
             }));
-            setStatus({
-                type: 'success', message: 'Endereço encontrado!'
-            })
-            
-        } catch {carro} {
-            setStatus({ type: 'error', message: e.message })
+            setStatus({ type: 'success', message: 'Endereço encontrado!' });
+        } catch (e) {
+            setStatus({ type: 'error', message: e.message });
         }
     }
 
@@ -53,54 +52,58 @@ export default function Contact() {
                     <div className="form-grid">
                         <label>CEP
                             <div className="cep-field">
-                                <input 
-                                    name="cep" 
-                                    inputMode="numeric" 
+                                <input
+                                    name="cep"
+                                    inputMode="numeric"
                                     value={form.cep}
-                                    onChange={(evento) => setForm((current) => {})}
-                                    placeholder="00000-000" 
+                                    onChange={(evento) => 
+                                        setForm((current) => 
+                                            ({...current, cep: evento.target.value}))}
+                                    placeholder="00000-000"
                                 />
                                 <button type="button" onClick={searchCep}>
                                 </button>
                             </div>
                         </label>
                         <label>Estado
-                            <select 
-                                name="state" 
+                            <select
+                                name="state"
                             >
                             </select>
                         </label>
                         <label>Cidade
-                            <select 
-                                name="city" 
+                            <select
+                                name="city"
                             >
                             </select>
                         </label>
                         <label>Rua
-                            <input 
-                                name="street" 
-                                placeholder="Nome da rua" 
+                            <input
+                                name="street"
+                                placeholder="Nome da rua"
+                                value={form.street}
                             />
                         </label>
                         <label>Número
-                            <input 
-                                name="number" 
-                                placeholder="123" 
+                            <input
+                                name="number"
+                                placeholder="123"
                             />
                         </label>
                         <label>Bairro
-                            <input 
-                                name="neighborhood" 
-                                placeholder="Seu bairro" 
+                            <input
+                                name="neighborhood"
+                                placeholder="Seu bairro"
+                                value={form.neighborhood}
                             />
                         </label>
                     </div>
                 </div>
                 <label>Mensagem
-                    <textarea 
-                        name="message" 
-                        rows="5" 
-                        placeholder="Como podemos ajudar?" 
+                    <textarea
+                        name="message"
+                        rows="5"
+                        placeholder="Como podemos ajudar?"
                     />
                 </label>
                 <button className="submit-button" type="submit">Enviar mensagem</button>
